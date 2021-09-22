@@ -1,0 +1,148 @@
+local CharGui = Instance.new("ScreenGui")
+local CharFrame = Instance.new("Frame")
+local CharButton = Instance.new("TextButton")
+local CharBox = Instance.new("TextBox")
+local Title = Instance.new("TextLabel")
+local UIGradient = Instance.new("UIGradient")
+local Credits = Instance.new("TextLabel")
+
+CharGui.Name = "CharGui"
+CharGui.Parent = game.CoreGui
+CharGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+CharFrame.Name = "CharFrame"
+CharFrame.Parent = CharGui
+CharFrame.BackgroundColor3 = Color3.fromRGB(83, 83, 83)
+CharFrame.BorderSizePixel = 0
+CharFrame.Position = UDim2.new(0.0558754951, 0, 0.0655191243, 0)
+CharFrame.Size = UDim2.new(0.31470111, 0, 0.440012276, 0)
+CharFrame.Active = true
+CharFrame.Draggable = true
+
+CharButton.Name = "CharButton"
+CharButton.Parent = CharFrame
+CharButton.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
+CharButton.BorderSizePixel = 0
+CharButton.Position = UDim2.new(0.0550864488, 0, 0.777133524, 0)
+CharButton.Size = UDim2.new(0.887181759, 0, 0.158137649, 0)
+CharButton.Font = Enum.Font.GothamBlack
+CharButton.Text = "Char"
+CharButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CharButton.TextScaled = true
+CharButton.TextSize = 14.000
+CharButton.TextWrapped = true
+
+CharBox.Name = "CharBox"
+CharBox.Parent = CharFrame
+CharBox.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+CharBox.Position = UDim2.new(0.0550864488, 0, 0.243983805, 0)
+CharBox.Size = UDim2.new(0.887181759, 0, 0.225910917, 0)
+CharBox.Font = Enum.Font.GothamBold
+CharBox.PlaceholderColor3 = Color3.fromRGB(255, 128, 0)
+CharBox.PlaceholderText = "Char Name"
+CharBox.Text = ""
+CharBox.TextColor3 = Color3.fromRGB(255, 128, 0)
+CharBox.TextScaled = true
+CharBox.TextSize = 14.000
+CharBox.TextWrapped = true
+
+Title.Name = "Title"
+Title.Parent = CharFrame
+Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Title.BackgroundTransparency = 1.000
+Title.Size = UDim2.new(0.997354627, 0, 0.117473677, 0)
+Title.Font = Enum.Font.GothamBlack
+Title.Text = "Copy Character"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.TextScaled = true
+Title.TextSize = 14.000
+Title.TextWrapped = true
+
+UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 0, 0)), ColorSequenceKeypoint.new(0.18, Color3.fromRGB(255, 140, 0)), ColorSequenceKeypoint.new(0.38, Color3.fromRGB(255, 247, 1)), ColorSequenceKeypoint.new(0.55, Color3.fromRGB(18, 255, 2)), ColorSequenceKeypoint.new(0.71, Color3.fromRGB(0, 179, 255)), ColorSequenceKeypoint.new(0.90, Color3.fromRGB(213, 0, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 0, 0))}
+UIGradient.Parent = Title
+
+Credits.Name = "Credits"
+Credits.Parent = CharFrame
+Credits.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Credits.BackgroundTransparency = 1.000
+Credits.Position = UDim2.new(0, 0, 0.998526275, 0)
+Credits.Size = UDim2.new(0.997354627, 0, 0.112955458, 0)
+Credits.Font = Enum.Font.GothamBold
+Credits.Text = "Made By Junior"
+Credits.TextColor3 = Color3.fromRGB(52, 89, 255)
+Credits.TextScaled = true
+Credits.TextSize = 14.000
+Credits.TextWrapped = true
+
+local function BGOZWZB_fake_script()
+	local script = Instance.new('Script', Title)
+
+	local thing = script.Parent
+	local uiGradient = thing:WaitForChild("UIGradient")
+	local tweenService = game:GetService("TweenService")
+
+	while true do
+		local tween = tweenService:Create(uiGradient, TweenInfo.new(2, Enum.EasingStyle.Linear), {Offset = Vector2.new(-1, 0)})
+		tween:Play()
+		wait(2)
+		uiGradient.Offset = Vector2.new(1, 0)
+		local tween2 = tweenService:Create(uiGradient, TweenInfo.new(2, Enum.EasingStyle.Linear), {Offset = Vector2.new(0, 0)})
+		tween2:Play()
+		wait(2)
+	end
+
+end
+coroutine.wrap(BGOZWZB_fake_script)()
+local function HYKRJ_fake_script()
+	local script = Instance.new('LocalScript', CharFrame)
+
+	repeat wait() until game.Players.LocalPlayer.Character
+	local plr = game.Players.LocalPlayer
+
+	local CharBox = script.Parent.CharBox
+	local CharButton = script.Parent.CharButton
+
+	CharButton.MouseButton1Click:Connect(function()
+		local Name = CharBox.Text
+		local Id = game.Players:GetUserIdFromNameAsync(Name)
+		local Appearance = game.Players:GetCharacterAppearanceAsync(Id)
+
+		for i,v in pairs(plr.Character:GetChildren()) do
+			if v:IsA("CharacterAppearance") or v:IsA("Accessory") then
+				wait(.1)
+				v:Destroy()
+			end
+		end
+
+		for i,v in pairs(Appearance:GetChildren()) do
+			v.Parent = plr.Character
+		end
+	end)
+end
+coroutine.wrap(HYKRJ_fake_script)()
+local function VYZJ_fake_script()
+	local script = Instance.new('LocalScript', CharGui)
+
+	local frame = script.Parent
+	local hotkey = Enum.KeyCode.V 
+
+	local UIS = game:GetService("UserInputService")
+	local open = false
+
+	UIS.InputBegan:Connect(function(key, gp)
+		if key.KeyCode == hotkey then
+			if UIS:GetFocusedTextBox() == nil then
+				if open == false then
+					open = true 
+					frame.Enabled = open
+				elseif open == true then
+					open = false
+					frame.Enabled = open
+				end
+			end
+		end
+	end)
+
+
+end
+coroutine.wrap(VYZJ_fake_script)()
